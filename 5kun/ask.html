@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ro‘yxatdan o‘tish</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 350px;
+    }
+
+    .card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #1a73e8;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h2>Ro‘yxatdan o‘tish</h2>
+    <input type="text" id="ism" placeholder="Ismingiz">
+    <input type="email" id="email" placeholder="Email manzilingiz">
+    <input type="password" id="parol" placeholder="Parolingiz (kamida 6 ta belgi)">
+    <input type="number" id="yil" placeholder="Tug‘ilgan yilingiz (masalan: 2005)">
+    <button onclick="register()">Ro‘yxatdan o‘tish</button>
+    <div class="result" id="natija"></div>
+  </div>
+
+  <script>
+    function register() {
+      let ism = document.getElementById("ism").value;
+      let email = document.getElementById("email").value;
+      let parol = document.getElementById("parol").value;
+      let yil = parseInt(document.getElementById("yil").value);
+
+      let hozirgiYil = new Date().getFullYear();
+      let yosh = hozirgiYil - yil;
+
+      // Tekshiruvlar
+      if (!ism || !email || !parol || isNaN(yil)) {
+        document.getElementById("natija").innerText = "❗ Iltimos, barcha maydonlarni to‘ldiring.";
+        return;
+      }
+
+      if (parol.length < 6) {
+        document.getElementById("natija").innerText = "❗ Parol kamida 6 ta belgidan iborat bo‘lishi kerak.";
+        return;
+      }
+
+      let xabar = `✅ Xush kelibsiz, ${ism}!\nSiz ${yosh} yoshdasiz.\nEmailingiz: ${email}`;
+
+      if (yosh < 18) {
+        xabar += `\n🧒 Siz hali voyaga yetmagansiz, orzularingiz katta bo‘lsin!`;
+      } else {
+        xabar += `\n🧑 Katta odam katta imkoniyatlar bilan keladi!`;
+      }
+
+      document.getElementById("natija").innerText = xabar;
+    }
+  </script>
+
+</body>
+
+</html>
